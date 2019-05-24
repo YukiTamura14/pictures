@@ -32,6 +32,6 @@ class UsersController < ApplicationController
   end
 
   def ensure_correct_user
-    redirect_to pictures_path unless @user.id == current_user.id
+    # redirect_to pictures_path unless @user.id == current_user.id
   end
 end
