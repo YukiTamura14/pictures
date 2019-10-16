@@ -1,0 +1,31 @@
+<div class="container_fluid">
+  <div class="row">
+    <div class="pic_content1 col-xs-12 col-sm-6 col-md-3">
+      <h3><%= @user.name %>のページ</h3>
+      <p>メールアドレス:<%= @user.email %></p>
+      <% @login_user_pic.each do |pic| %>
+        <% count = 0 %>
+        <% count = pic.favorites.count if pic.favorites.present? %>
+        お気に入りされた合計数:<%= count %>
+      <% end %>
+      <% if logged_in? %>
+        <p><%= link_to "Play with Insta?", pictures_path %></p>
+      <% else %>
+        <p>Play with InstaClone? <%= link_to "Log in now!", new_session_path %></p>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card">
+      <% @pictures.each do |pic| %>
+        <div class="col-xs-12 col-sm-6 col-md-3 contents card-img-top">
+          <%= image_tag(pic.picture.image.url) %>
+            <div class="card-body">
+              <p class="card-text"><%= pic.user.name %><br><%= pic.picture.content %></p>
+                <%= link_to "Good Bye! My Favorite!", favorite_path(id: pic.id), method: :delete, class: "btn de" %>
+             </div>
+            </div>
+          <% end %>
+      </div>
+   </div>
+</div>

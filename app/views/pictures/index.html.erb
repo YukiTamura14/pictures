@@ -1,0 +1,24 @@
+<div class="index_container"><h2>投稿一覧</h2>
+  <% if logged_in? %>
+    <p><%= link_to "投稿する", new_picture_path, class: "create_btn" %></p>
+  <% else %>
+    <p><%= link_to "投稿する", new_session_path, class: "create_btn" %></p>
+  <% end %>
+</div>
+<div class="container_fluid">
+  <div class="row card">
+    <% @pictures.each do |picture| %>
+      <div class="col-xs-12 col-sm-6 col-md-3 contents card-img-top">
+      <%= image_tag(picture.image.url) %>
+      <div class="card-body">
+        <p class="card-text"><%= picture.content %></p>
+        <%= link_to "詳細", picture_path(picture.id) %>
+        <% if picture.user_id == current_user.id %>
+          <%= link_to "編集", edit_picture_path(picture.id) %>
+          <%= link_to "削除", picture_path(picture.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+        <% end %>
+      </div>
+      </div>
+    <% end %>
+  </div>
+</div>

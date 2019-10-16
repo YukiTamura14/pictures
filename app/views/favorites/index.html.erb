@@ -1,0 +1,6 @@
+<%= "お気に入り一覧" %>
+<% @favorite_pictures.each do |pic| %>
+  <%= image_tag(pic.picture.image.url)%>
+<% end %>
+
+<p><%= link_to "一覧画面に戻る", pictures_path %></p>

@@ -1,0 +1,26 @@
+<h2>以下の内容で投稿をする</h2>
+  <div class="row">
+    <div class="card">
+      <%= form_with(model: @picture, url: pictures_path, local: true) do |form| %>
+        <div class="col-xs-12 col-sm-6 col-md-3 contents card-img-top">
+          <%= image_tag(@picture.image.url) %>
+          <%= form.hidden_field :image %>
+          <%= form.hidden_field :image_cache %><br>
+          <%= form.hidden_field :content %>
+          <%= form.hidden_field :confirm, value: "confirm" %>
+          <%= hidden_field_tag :confirm, "confirm" %>
+        <div class="card-body">
+          <p class="card-text">content:<%= @picture.content %></p>
+        </div>
+        <%= form.submit :class => "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= form_with(model: @picture, url: new_picture_path, local: true, method: "get") do |form| %>
+    <%= form.hidden_field :content %>
+    <%= form.hidden_field :image_cache %>
+    <%= hidden_field_tag :"cache[image]", @picture.image.cache_name %>
+    <%= form.submit "戻る", name: "back", :class => "btn btn-danger" %>
+  <% end %>
